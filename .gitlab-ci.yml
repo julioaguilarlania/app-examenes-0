@@ -30,6 +30,11 @@ buildtest:       # Este job construye y ejecuta tests pues Maven hace ambas cosa
 
 build_image:
   stage: deploy
+  image: docker:20
+  services:
+    - docker:20-dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
   script:
     - echo "Construyendo imagen"
     - docker build -t julioaguilarlania/app-examenes-0:1.0 .
