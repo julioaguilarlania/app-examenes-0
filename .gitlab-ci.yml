@@ -18,6 +18,8 @@
 
 stages:          # List of stages for jobs, and their order of execution
   - buildtest
+  - deploy
+
 
 buildtest:       # Este job construye y ejecuta tests pues Maven hace ambas cosas
   stage: buildtest
@@ -26,3 +28,8 @@ buildtest:       # Este job construye y ejecuta tests pues Maven hace ambas cosa
     - echo "Compiling the code..."
     - mvn package
 
+build_image:
+  stage: deploy
+  script:
+    - echo "Construyendo imagen"
+    - docker build -t julioaguilarlania/app-examenes-0:1.0 .
